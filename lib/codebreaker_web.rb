@@ -29,10 +29,18 @@ module RakeWeb
       Rack::Response.new(render('win.html.erb'))
     end
 
+    def apply_game_level
+      if(@request.params['level'])
+        return @request.params['level']
+      elsif @request.cookies['level']
+        return @request.cookies['level']
+      end
+    end
+
     def set_game_instance
       Rack::Response.new do |response|
         set_player_cookies(response)
-        level = @request.cookies['level'] || @request.params['level']
+        level = apply_game_level
         @@game = CodebreakerAp::Game.new
         @@game.difficulty.initialize_difficulty(level)
         set_game_cookies(response)
@@ -48,6 +56,7 @@ module RakeWeb
     end
 
     def set_game_cookies(response)
+      response.set_cookie('game_lvl', @@game.difficulty.level)
       response.set_cookie('secret_code', @@game.secret_code.join)
       response.set_cookie('hint', nil)
       response.set_cookie('checked_answer', nil)

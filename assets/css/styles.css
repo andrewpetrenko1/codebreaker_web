@@ -1,6 +1,6 @@
 #introduction {
   background-color: #3a5db5;
-  background-image: url("../images/garage_big.svg"), url("../images/garage_small.png"), linear-gradient(180deg, #b53a8a 1%, #3a5db5 100%);
+  background-image: linear-gradient(180deg, #b53a8a 1%, #3a5db5 100%);
   background-repeat: no-repeat, no-repeat;
   background-position: 5% 65%, 44% 20%;
 }
