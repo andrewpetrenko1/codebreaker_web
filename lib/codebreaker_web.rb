@@ -31,23 +31,23 @@ module RakeWeb
 
     def set_game_instance
       Rack::Response.new do |response|
-        set_player_cookies
+        set_player_cookies(response)
         level = @request.cookies['level'] || @request.params['level']
         @@game = CodebreakerAp::Game.new
         @@game.difficulty.initialize_difficulty(level)
-        set_game_cookies
+        set_game_cookies(response)
         response.redirect('/game')
       end
     end
 
-    def set_player_cookies
+    def set_player_cookies(response)
       return unless @request.params['player_name'] && @request.params['level']
 
       response.set_cookie('player_name', @request.params['player_name'])
       response.set_cookie('level', @request.params['level'])
     end
 
-    def set_game_cookies
+    def set_game_cookies(response)
       response.set_cookie('secret_code', @@game.secret_code.join)
       response.set_cookie('hint', nil)
       response.set_cookie('checked_answer', nil)
