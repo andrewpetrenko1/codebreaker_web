@@ -1,93 +1,101 @@
 <% @request.params %>
 <!DOCTYPE html>
 <html lang="en" class="mdl-js">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="assets/favicon.ico" rel="icon">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/styles.css" rel="stylesheet">
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <title>Codebreaker Web</title>
-  <body>
-    <section id="introduction">
-      <div class="container">
-        <div class="row fill-viewport align-items-center justify-content-center">
-          <div class="col-12 col-md-6">
-            <div class="row">
-              <div class="col-md-auto">
-                <h1 class="text-white title">Codebreaker 2019</h1>
-              </div>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="assets/favicon.ico" rel="icon">
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/styles.css" rel="stylesheet">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<title>Codebreaker Web</title>
+
+<body>
+  <section id="introduction">
+    <div class="container">
+      <div class="row fill-viewport align-items-center justify-content-center">
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-md-auto">
+              <h1 class="text-white title">Codebreaker_ap</h1>
             </div>
-            <p class="lead text-white-70">
-              Hello, <%= @request.cookies['player_name'] %>!
-              Try to guess 4-digit number, that consists of numbers in a range from 1 to 6.
-            </p>
-            <hr class="mb-4">
-            <div class="row">
-              <div class="col button">
-                <button type="button" class="btn btn-primary" disabled>
-                  Level:
-                  <span class="badge badge-light">
-                    <%= @request.cookies['level'].capitalize %>
-                  </span>
-                </button>
-              </div>
-              <div class="col text-center button">
-                <button type="button" class="btn btn-primary" disabled>
-                  Attempts:
-                  <span class="badge badge-light"><%= @@game.difficulty.attempts %></span>
-                </button>
-              </div>
-
-              <div class="col button">
-                <button type="button" class="btn btn-primary float-right">
-                  Hints:
-                  <span class="badge badge-light"><%= @@game.difficulty.hints %></span>
-                </button>
-              </div>
-            </div>
-            <hr class="mb-4">
-
-            <form method="post" action="/submit_answer">
-              <div class="form-group">
-                <input class="form-control guess_input" name="number" pattern="^[1-6]{4}$" placeholder="1234" required="" autocomplete="off">
-              </div>
-              <div class="form-group guess_markers_list">
-                <div id="guess_marker">
-                  <%if @request.cookies['checked_answer']%>
-                    <%checked_answer = @request.cookies['checked_answer'].split('')%>
-                    <%checked_answer.each do |value|%>
-                      <%case value
-                        when '+'%>
-                        <button type="button" class="btn btn-success marks" disabled>+</button>
-                      <%when '-'%>
-                        <button type="button" class="btn btn-primary marks" disabled>-</button>
-                      <%end%>
-                    <%end%>
-                    <%(CodebreakerAp::Game::CODE_LENGTH_RANGE.size - checked_answer.size).times do%>
-                      <button type="button" class="btn btn-danger marks" disabled>x</button>
-                    <%end%>
-                  <%end%>
-                </div>
-              </div>
-              <hr class="mb-4">
-
-              <button type="submit" class="btn btn-primary btn-lg">
-                Submit
-              </button>
-              <a class="btn btn-warning btn-lg float-right" role="button" href="/hint">
-                Show hint!
-                <%if @request.cookies['hint']%>
-                  <%@request.cookies['hint'].split('').each do |value|%>
-                  <span class="badge badge-light"><%=value%></span>
-                  <%end%>
-                <%end%>
-              </a>
-            </form>
           </div>
+          <p class="lead text-white-70">
+            Hello, <%= @request.cookies['player_name'] %>!
+            Try to guess 4-digit number, that consists of numbers in a range from 1 to 6.
+          </p>
+          <hr class="mb-4">
+          <div class="row">
+            <div class="col button">
+              <button type="button" class="btn btn-primary" disabled>
+                Level:
+                <span class="badge badge-light">
+                  <%= @request.cookies['level'].capitalize %>
+                </span>
+              </button>
+            </div>
+            <div class="col text-center button">
+              <button type="button" class="btn btn-primary" disabled>
+                Attempts:
+                <span class="badge badge-light"><%= @@game.difficulty.attempts %></span>
+              </button>
+            </div>
+
+            <div class="col button">
+              <button type="button" class="btn btn-primary float-right">
+                Hints:
+                <span class="badge badge-light"><%= @@game.difficulty.hints %></span>
+              </button>
+            </div>
+          </div>
+          <hr class="mb-4">
+
+          <form method="post" action="/submit_answer">
+            <div class="form-group">
+              <input class="form-control guess_input" name="number" pattern="^[1-6]{4}$" placeholder="1234" required=""
+                autocomplete="off">
+            </div>
+            <div class="form-group guess_markers_list">
+              <div id="guess_marker">
+                <%if @request.cookies['checked_answer']%>
+                <%checked_answer = @request.cookies['checked_answer'].split('')%>
+                <%checked_answer.each do |value|%>
+                <%case value
+                        when '+'%>
+                <button type="button" class="btn btn-success marks" disabled>+</button>
+                <%when '-'%>
+                <button type="button" class="btn btn-primary marks" disabled>-</button>
+                <%end%>
+                <%end%>
+                <%(CodebreakerAp::Game::CODE_LENGTH_RANGE.size - checked_answer.size).times do%>
+                <button type="button" class="btn btn-danger marks" disabled>x</button>
+                <%end%>
+                <%end%>
+              </div>
+            </div>
+            <hr class="mb-4">
+
+            <button type="submit" class="btn btn-primary btn-lg">
+              Submit
+            </button>
+            <a class="btn btn-warning btn-lg float-right" role="button" href="/hint">
+              Show hint!
+              <%if @request.cookies['hint']%>
+              <%@request.cookies['hint'].split('').each do |value|%>
+              <span class="badge badge-light"><%=value%></span>
+              <%end%>
+              <%end%>
+            </a>
+          </form>
         </div>
-       </div>
-    </section>
-  </body>
+      </div>
+      <footer>
+        <a href="https://github.com/andrewpetrenko1/codebreaker_web">
+          <img src="assets/images/github.png">
+        </a>
+      </footer>
+    </div>
+  </section>
+</body>
+
 </html>

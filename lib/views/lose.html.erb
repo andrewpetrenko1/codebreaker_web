@@ -16,7 +16,7 @@
         <div class="col-12 col-md-6">
           <div class="row">
             <div class="col-md-auto">
-              <h1 class="text-white title inline-block">Codebreaker 2019</h1>
+              <h1 class="text-white title inline-block">Codebreaker_ap</h1>
             </div>
           </div>
           <div class="row">
@@ -30,13 +30,15 @@
               <button type="button" class="btn btn-primary" disabled>
                 Attempts Left:
                 <span class="badge badge-light">
-                  <%=@@game.difficulty.attempts%> / <%= CodebreakerAp::Difficulty::DIFFICULTY[@@game.difficulty.level.to_sym][:attempts]%>
+                  <%=@@game.difficulty.attempts%> /
+                  <%= CodebreakerAp::Difficulty::DIFFICULTY[@@game.difficulty.level.to_sym][:attempts]%>
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
                 Hints Left:
                 <span class="badge badge-light">
-                  <%=@@game.difficulty.hints%> / <%= CodebreakerAp::Difficulty::DIFFICULTY[@@game.difficulty.level.to_sym][:hints]%>
+                  <%=@@game.difficulty.hints%> /
+                  <%= CodebreakerAp::Difficulty::DIFFICULTY[@@game.difficulty.level.to_sym][:hints]%>
                 </span>
               </button>
             </div>
@@ -64,7 +66,13 @@
             Statistics
           </a>
         </div>
-       </div>
-    </section>
-  </body>
+        <footer>
+          <a href="https://github.com/andrewpetrenko1/codebreaker_web">
+            <img src="assets/images/github.png">
+          </a>
+        </footer>
+      </div>
+  </section>
+</body>
+
 </html>

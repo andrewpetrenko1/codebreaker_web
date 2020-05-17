@@ -26,7 +26,9 @@ module RakeWeb
 
     def save_statistic
       @@game.save_stats(@request.cookies['player_name'], @@game.difficulty)
-      Rack::Response.new(render('win.html.erb'))
+      Rack::Response.new do |response|
+        response.redirect('/win')
+      end
     end
 
     def apply_game_level
