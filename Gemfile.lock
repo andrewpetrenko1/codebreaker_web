@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    codebreaker_ap (0.1.3)
+    concurrent-ruby (1.1.6)
+    i18n (1.8.2)
+      concurrent-ruby (~> 1.0)
+    rack (2.2.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  codebreaker_ap (= 0.1.3)
+  i18n
+  rack
+
+BUNDLED WITH
+   2.1.2
